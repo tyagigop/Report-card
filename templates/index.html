@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Navbar</a>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" name="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      <h1> {{s}}</h1>
+
+      <a href="{% url 'send_email' %}" class="btn btn-primary">Send</a>
+
+    
+
+
+    <div class="container-fluid p-5">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Student Id</th>
+            <th scope="col">Student Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {% for query in queryset %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td><a href="{% url 'getMarks' query.student.student_id %}">{{query.student.student_id}}</a></td>
+            <td>{{query.student.student_name}}</td>
+            <td>{{query.student.department}}</td>
+            <td>{{query.subject}}</td>
+            <td>{{query.marks}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="text-center">Page {{ queryset.number }} of {{ queryset.paginator.num_pages }}.</p>
+
+
+    <nav aria-label="Page navigation example">      
+        <ul class="pagination justify-content-center">
+            <div class="pagination">
+                
+                    {% if queryset.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">&laquo; first</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ queryset.previous_page_number }}">previous</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ queryset.number|add:"-1" }}">{{queryset.number|add:"-1"}}</a></li>
+
+                    {% endif %}
+
+                    <span class="current">
+                        <li class="page-item"><a class="page-link" href="?page={{ queryset.number }}">{{queryset.number}}</a></li>
+
+                    </span>
+
+                    {% if queryset.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ queryset.number|add:"1" }}">{{queryset.number|add:"1"}}</a></li>
+
+                    <li class="page-item"><a class="page-link" href="?page={{ queryset.next_page_number }}">next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ queryset.paginator.num_pages }}">last &raquo;</a></li>
+                    {% endif %}
+
+
+
+                    
+
+                
+            </div>
+        </ul>
+        
+    </nav>
+
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>

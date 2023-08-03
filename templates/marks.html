@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Navbar</a>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" name="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+
+
+      <h3 class="text-center mt-4">{{name}} - {{l}}</h3>
+
+      <h1>Rank :{{queryset2.rank}}</h1>
+      <h3>Date of Result Generation: {{queryset2.date_of_generation}}</h3>
+    <div class="container-sm mt-3">
+    <table class="table table-bordered border-primary">
+        <thead>
+          <tr>
+            <th scope="col">S.NO</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        {% for query in queryset %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+        
+            <td>{{query.subject}}</td>
+            <td>{{query.marks}}</td>
+          </tr>
+          {% endfor %}
+          <tr>
+            <th colspan="2">Total Marks</th>
+            <td>{{ total_marks.marks__sum }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  
+
+
+
+
+
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
